@@ -1,0 +1,37 @@
+name: "First contribution: add my name"
+description: New here? Start with this issue, then add yourself to the contributors list.
+title: "Add <your name> to the contributors list"
+labels: ["documentation", "first-issue"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Welcome! Opening this issue is step 1 of the
+        [first contribution walkthrough](https://github.com/Scott-Jeppson/ACM-Minecraft-Mod/blob/master/CONTRIBUTING.md#your-first-contribution-add-your-name).
+
+        Replace `<your name>` in the title above, fill in the form, and submit it.
+        Then follow the rest of the walkthrough to open a pull request that closes this issue.
+  - type: input
+    id: github-username
+    attributes:
+      label: GitHub username
+      description: Your contributor file will be named `contributors/<this-username>.md`.
+      placeholder: octocat
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else?
+      description: Optional. Questions about the process are welcome here.
+    validations:
+      required: false
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Before you submit
+      options:
+        - label: I have read the [contributing guidelines](https://github.com/Scott-Jeppson/ACM-Minecraft-Mod/blob/master/CONTRIBUTING.md).
+          required: true
+        - label: I will open the pull request for this issue myself.
+          required: true

@@ -6,6 +6,12 @@ primary effect at beacon tier 3 or higher and as a level II secondary effect
 at tier 4. The project also contains the build configuration and entrypoints
 needed to add more Minecraft content.
 
+## Contributing
+
+This project is built for practicing open source contribution, and newcomers
+are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) to get started. All participation is covered
+by the [Code of Conduct](CODE_OF_CONDUCT.md).
+
 ## Requirements
 
 - Java 21
@@ -63,6 +69,12 @@ while a game is running.
 ├── .gitignore                      Local caches, builds, logs, and IDE files
 ├── LICENSE                         MIT license
 ├── README.md                       Project and development documentation
+├── CONTRIBUTING.md                 How to contribute, step by step
+├── CODE_OF_CONDUCT.md              Expected behavior in project spaces
+├── .github
+│   ├── ISSUE_TEMPLATE/             Issue forms shown when opening an issue
+│   └── PULL_REQUEST_TEMPLATE.md    Default pull request description
+├── contributors/                   One file per contributor
 └── src/main
     ├── java/com/acm
     │   ├── AcmMod.java             Server/common Fabric entrypoint

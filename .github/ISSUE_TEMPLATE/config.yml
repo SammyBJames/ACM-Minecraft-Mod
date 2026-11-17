@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Question or help request
+    url: https://github.com/Scott-Jeppson/ACM-Minecraft-Mod/discussions
+    about: Ask questions about the mod or the contribution process in Discussions.
+  - name: Contributing guidelines
+    url: https://github.com/Scott-Jeppson/ACM-Minecraft-Mod/blob/master/CONTRIBUTING.md
+    about: Read this before opening your first issue or pull request.
