@@ -1,4 +1,4 @@
-# ACM Open Source Minecraft Mod
+# BLAH BLAH BLAH
 
 ACM is a Fabric 1.21.1 mod framework. Its first gameplay changes extend
 vanilla beacons with additional layers and Saturation as an additional
