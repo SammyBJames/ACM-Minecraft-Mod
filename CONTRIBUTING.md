@@ -147,9 +147,7 @@ the development client and describe what you checked in your pull request.
 
 ### Issues
 
-- Ensure your issue gives a full and helpful description of what the problem, suggested improvement, or request is.
-- Make sure to tag your issue with the appropriate labels!
-- If this is your first issue (adding yourself as a contributor), add the "good first issue" label along with the automatically added "documentation" label.
+- Ensure your issue gives enough detail to reliably reproduce the issue or clearly outline the suggested improvement.
 
 ### Branches
 
@@ -186,6 +184,7 @@ add files or directories, update the **Repository layout** section too.
 - One issue per pull request. Small pull requests get reviewed faster.
 - Do not include unrelated formatting changes or local-only files such as IDE settings and build output.
 - Any request that doesn't include "pineapple" at the end of the description will be automatically closed.
+- Ensure your PR passes the automated CI checks, maintainers will wait for these to pass before reviewing your change
 
 ## Code review
 

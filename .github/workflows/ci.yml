@@ -1,0 +1,105 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  template-unchanged:
+    name: Contributor Template Unchanged
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
+
+      - name: Check that contributors/_TEMPLATE.md was not modified
+        run: |
+          file="contributors/_TEMPLATE.md"
+
+          if ! git cat-file -e "HEAD^1:$file" 2>/dev/null; then
+            echo "$file does not exist on the base branch, so there is nothing to compare."
+            exit 0
+          fi
+
+          if git diff --quiet HEAD^1 HEAD -- "$file"; then
+            echo "$file is unchanged."
+            exit 0
+          fi
+
+          echo "::error file=$file::This pull request changes $file. Copy the template to contributors/<your-username>.md and edit the copy instead. See CONTRIBUTING.md."
+          git --no-pager diff HEAD^1 HEAD -- "$file"
+          exit 1
+
+  own-contributor-file:
+    name: Contributor Own Username
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
+
+      - name: Check that only contributors/<author>.md was changed in contributors/
+        env:
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: |
+          dir="contributors"
+          allowed="$dir/$PR_AUTHOR.md"
+
+          if ! git cat-file -e "HEAD^1:$dir" 2>/dev/null; then
+            echo "$dir/ does not exist on the base branch, so there is nothing to compare."
+            exit 0
+          fi
+
+          changed="$(git diff --no-renames --name-only HEAD^1 HEAD -- "$dir/")"
+
+          if [ -z "$changed" ]; then
+            echo "This pull request does not change anything in $dir/."
+            exit 0
+          fi
+
+          not_allowed=""
+          while IFS= read -r path; do
+            if [ "${path,,}" != "${allowed,,}" ]; then
+              not_allowed+="  - $path"$'\n'
+            fi
+          done <<< "$changed"
+
+          if [ -z "$not_allowed" ]; then
+            echo "The only file changed in $dir/ is $allowed."
+            exit 0
+          fi
+
+          echo "::error::This pull request by $PR_AUTHOR changes files in $dir/ other than $allowed. The only file you may add or edit there is the one named after your GitHub username. See CONTRIBUTING.md."
+          echo "Files that may not be changed by this pull request:"
+          printf '%s' "$not_allowed"
+          exit 1
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v6
+        with:
+          gradle-version: "9.7.1"
+          cache-provider: basic
+
+      - name: Build
+        run: gradle build

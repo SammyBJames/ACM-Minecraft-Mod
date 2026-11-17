@@ -1,4 +1,4 @@
-# ACM Open Source Minecraft Mod
+# BLAH BLAH BLAH
 
 ACM is a Fabric 1.21.1 mod framework. Its first gameplay changes extend
 vanilla beacons with additional layers and Saturation as an additional
@@ -73,7 +73,8 @@ while a game is running.
 ├── CODE_OF_CONDUCT.md              Expected behavior in project spaces
 ├── .github
 │   ├── ISSUE_TEMPLATE/             Issue forms shown when opening an issue
-│   └── PULL_REQUEST_TEMPLATE.md    Default pull request description
+│   ├── PULL_REQUEST_TEMPLATE.md    Default pull request description
+│   └── workflows/ci.yml            Checks run on every pull request
 ├── contributors/                   One file per contributor
 └── src/main
     ├── java/com/acm

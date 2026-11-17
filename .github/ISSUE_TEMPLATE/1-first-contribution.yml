@@ -1,7 +1,7 @@
 name: "First contribution: add my name"
 description: New here? Start with this issue, then add yourself to the contributors list.
 title: "Add <your name> to the contributors list"
-labels: ["documentation", "first-issue"]
+labels: ["documentation", "good first issue"]
 body:
   - type: markdown
     attributes:
